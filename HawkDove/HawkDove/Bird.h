@@ -6,10 +6,11 @@
 class Bird
 {
 public:
-	Bird(int, int);
+	Bird(int, int, int);
 	Bird(const Bird &);
 	~Bird();
 public:
+	void setGenotype(int);
 	int getGenotype();
 	char getAggressiveness();
 	int getPoints(void);
@@ -17,17 +18,21 @@ public:
 	void addPoints(int);
 	void incAmountOfFights();
 	int getAmountOfFights();
-	int getName();
+	int getId();
+	bool isFighting();
+	void mutate();
+	void renew();
 
 private:
 	void computeAggressiveness();
 
 private:
 	int genotype;
-	char aggr; //aggressiveness
-	int points;
-	int name;
+	int aggr; //aggressiveness
+	int points; // fitness points
+	int id;
 	int amountOfFights;
+	int mutationFactor;
 
 public:
 	static const int maxAggr;

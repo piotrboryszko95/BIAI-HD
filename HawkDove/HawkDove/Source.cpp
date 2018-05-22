@@ -1,7 +1,13 @@
-#include "Population.h"
+#include "Generation.h"
 #include <iostream>
 
+#define GENERATIONS 5
+
 int main() {
+
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // sluzy do wykrywania wyciekow pamieci
+
+	std::srand(time(NULL));
 
 	//Bird ** tablica;
 	//tablica = new Bird*[10];
@@ -10,26 +16,24 @@ int main() {
 	//	std::cout << i << " " << tablica[i]->getGenotype() << " " << tablica[i]->getAggressiveness() << std::endl;
 	//}
 
-	std::srand(time(NULL));
 
-	Population pop(20);
+	Generation pop(100, 2); // drugi argument to mutationFactor <0,100>
 	pop.setC(-2);
 	pop.setV(1);
-	pop.setReplacementFactor(10.0f);
+	pop.setReplacementFactor(10);
+	pop.setFightsPerGeneration(100);
+
 	std::cout << pop.getAvgAggr() << std::endl;
 	std::cout << std::endl;
 
-	for (int i = 0; i < 100; i++) {
-		pop.fightAllBirds();
+
+	pop.showStats();
+	for (int i = 0; i < GENERATIONS; i++) {
 		//pop.showStats();
-		//std::cout << std::endl;
-		//system("pause");
+		pop.live();
 	}
-	pop.showStats();
-	pop.sortByFitness();
-	pop.showStats();
-	pop.reproduct();
-	pop.showStats();
+
+
 	system("pause");
 
 	return 0;

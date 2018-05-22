@@ -18,7 +18,7 @@
     <ClInclude Include="Bird.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Population.h">
+    <ClInclude Include="Generation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -26,10 +26,10 @@
     <ClCompile Include="Bird.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Population.cpp">
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="Generation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
