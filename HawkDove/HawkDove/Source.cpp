@@ -1,7 +1,7 @@
 #include "Generation.h"
 #include <iostream>
 
-#define GENERATIONS 5
+#define GENERATIONS 200
 
 int main() {
 
@@ -9,32 +9,35 @@ int main() {
 
 	std::srand(time(NULL));
 
-	//Bird ** tablica;
-	//tablica = new Bird*[10];
-	//for (int i = 0; i < 10; i++) {
-	//	tablica[i] = new Bird(1000*i);
-	//	std::cout << i << " " << tablica[i]->getGenotype() << " " << tablica[i]->getAggressiveness() << std::endl;
-	//}
+	Generation * pop = new Generation(200); // drugi argument to mutationFactor <0,100>
+	pop->setC(0);
+	pop->setV(20);
+	pop->setReplacementFactor(5);
+	pop->setFightsPerGeneration(100);
+	pop->setMutationChances(25);
 
-
-	Generation pop(100, 2); // drugi argument to mutationFactor <0,100>
-	pop.setC(-2);
-	pop.setV(1);
-	pop.setReplacementFactor(10);
-	pop.setFightsPerGeneration(100);
-
-	std::cout << pop.getAvgAggr() << std::endl;
 	std::cout << std::endl;
 
-
-	pop.showStats();
-	for (int i = 0; i < GENERATIONS; i++) {
-		//pop.showStats();
-		pop.live();
+	char ch;
+	char v;
+	while (true) {
+		for (int i = 0; i < GENERATIONS; i++) {
+			pop->live();
+			std::cout << pop->getAvgAggr() << "\t" << pop->getStrongestGenotype() << std::endl;
+		}
+		std::cout << "Mielimy dalej?" << std::endl;
+		std::cin >> ch;
+		if (ch == 't') {
+			std::cout << "Podaj V" << std::endl;
+			std::cin >> v;
+			pop->setV(v - 48);
+		}
+		else if (ch == 'n')
+			break;
 	}
-
-
 	system("pause");
+
+	delete(pop);
 
 	return 0;
 }
