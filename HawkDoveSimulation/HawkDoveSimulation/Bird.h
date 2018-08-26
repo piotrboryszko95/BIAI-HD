@@ -19,7 +19,6 @@ public:
 	int getAmountOfFights();
 	int getId();
 
-	void fight(Bird&, int, int);
 	void addPoints(int);
 	void incAmountOfFights();
 	bool isFighting();

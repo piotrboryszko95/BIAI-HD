@@ -44,48 +44,6 @@ int Bird::getPoints(void)
 	return this->points;
 }
 
-void Bird::fight(Bird& obj, int v, int c)
-{
-
-	bool thisFight = false;
-	bool objFight = false;
-
-	if (rand() % maxAggr <= this->getAggressiveness())
-		thisFight = true;
-
-	if (rand() % maxAggr <= obj.getAggressiveness())
-		objFight = true;
-
-	if (thisFight) {
-		if (objFight) { //oba walcza - 50% szans na wygrana + oboje ponosza koszt walki
-			if (rand() % 2 == 0) {
-				this->addPoints(v - c);
-				obj.addPoints(-c);
-			}
-			else {
-				this->addPoints(-c);
-				obj.addPoints(v - c);
-			}
-		}
-		else { //tylko jeden walczy, wygrywa pule, nikt nie ponosi kosztow walki
-			this->addPoints(v);
-		}
-	}
-	else {
-		if (objFight) { //tylko jeden walczy, wygrywa pule, nikt nie ponosi kosztow walki
-			obj.addPoints(v);
-		}
-		else { //nikt nie walczy, 50 % szans na wygranie puli, nikt nie ponosi kosztow walki
-			if (rand() % 2 == 0) {
-				this->addPoints(v);
-			}
-			else {
-				obj.addPoints(v);
-			}
-		}
-	}
-}
-
 void Bird::addPoints(int pts)
 {
 	this->points += pts;

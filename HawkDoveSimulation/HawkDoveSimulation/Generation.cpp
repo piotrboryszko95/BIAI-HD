@@ -192,12 +192,12 @@ void Generation::fight(Bird & one, Bird & two)
 	if (one.isFighting()) {
 		if (two.isFighting()) { //oba walcza - 50% szans na wygrana + oboje ponosza koszt walki
 			if (rand() % 2 == 0) {
-				one.addPoints(v + c);
-				two.addPoints(c);
+				one.addPoints(v - c);
+				two.addPoints(-c);
 			}
 			else {
-				one.addPoints(c);
-				two.addPoints(v + c);
+				one.addPoints(-c);
+				two.addPoints(v - c);
 			}
 		}
 		else { //tylko jeden walczy, wygrywa pule, nikt nie ponosi kosztow walki

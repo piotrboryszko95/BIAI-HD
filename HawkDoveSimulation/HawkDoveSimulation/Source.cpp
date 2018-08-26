@@ -1,11 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <bitset>
 #include <SFML\Graphics.hpp>
 #include "Generation.h"
 #include "Scene.h"
-
-#define GENERATIONS 200
 
 std::string doubleCommaSeparated(double value);
 
@@ -102,7 +101,7 @@ int main(int argc, char * argv[]) {
 		gen->live();
 		avgAggr = gen->getAvgAggr();
 		scene.updateStateBar(avgAggr / Bird::maxAggr);
-		std::cout << avgAggr << "\t" << gen->getStrongestGenotype() << std::endl;
+		std::cout << avgAggr << "\t" << std::bitset<32>(gen->getStrongestGenotype()).to_string() << std::endl;
 
 		scene.setGeneration(i);
 
