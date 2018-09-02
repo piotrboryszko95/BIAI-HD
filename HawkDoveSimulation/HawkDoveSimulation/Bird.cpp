@@ -69,15 +69,10 @@ bool Bird::isFighting()
 	return (rand() % Bird::maxAggr) <= getAggressiveness();
 }
 
-void Bird::mutate()
-{
-	genotype ^= 7 << rand() % (sizeof(int) * CHAR_BIT - 3); // zamien trzy bity losowo wybrane
-}
-
-double Bird::mutateDouble() {
-	int bit = 1;
-	bit = bit << rand() % 32;
-	genotype ^= bit;
+double Bird::mutate(int bitsToMutate) {
+	for (int i = 0; i < bitsToMutate; i++) {
+		genotype ^= 1 << rand() % 32;
+	}
 	return genotype;
 }
 

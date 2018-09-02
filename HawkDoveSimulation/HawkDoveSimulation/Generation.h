@@ -18,6 +18,7 @@ public:
 	void setFightsPerGeneration(int);
 	void setReplacementFactor(int);
 	void setMutationChances(int);
+	void setBitsToMutate(int);
 
 	int getPopulationSize();
 	double getAvgAggr();
@@ -50,6 +51,7 @@ private:
 	int replacementFactor;
 	int fightsPerGeneration;
 	int mutationFactor; //denominator; set on X means, that chances of mutation in each generation are 1/X
+	int bitsToMutate;
 };
 
 #endif

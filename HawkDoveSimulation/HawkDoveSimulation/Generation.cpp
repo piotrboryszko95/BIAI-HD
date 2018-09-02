@@ -5,13 +5,11 @@
 Generation::Generation(int populationSize)
 {
 	this->populationSize = populationSize;
-	//std::srand(time(NULL));
 
 	birds = new Bird*[populationSize];
 	for (int i = 0; i < populationSize; i++) {
 		birds[i] = new Bird(genRandomInt(), i);
 	}
-
 }
 
 
@@ -31,6 +29,11 @@ void Generation::setV(int v)
 void Generation::setC(int c)
 {
 	this->c = c;
+}
+
+void Generation::setBitsToMutate(int bitsToMutate)
+{
+	this->bitsToMutate = bitsToMutate;
 }
 
 void Generation::setFightsPerGeneration(int fightsPerGeneration)
@@ -77,7 +80,7 @@ int Generation::getStrongestGenotype()
 
 void Generation::fightAllBirds()
 {
-	int remainingBirdsToFight = getEvenNumberOfBirds();	
+	int remainingBirdsToFight = getEvenNumberOfBirds();
 
 	int bird1, bird2;
 	while (remainingBirdsToFight > 0) {
@@ -89,7 +92,7 @@ void Generation::fightAllBirds()
 
 void Generation::live()
 {
-	
+
 	//sortById();
 
 	for (int i = 0; i < fightsPerGeneration; i++) {
@@ -101,12 +104,11 @@ void Generation::live()
 	//showStats();
 	select();
 	crossOverAll();
-	if (rand() % mutationFactor == 0) {
-		int i = rand() % populationSize;
-		birds[i]->setGenotype(birds[i]->mutateDouble());
-	}
 	for (int i = 0; i < populationSize; i++) {
-		//birds[i]->mutate();
+		if (rand() % mutationFactor == 0) {
+			//int i = rand() % populationSize;
+			birds[i]->setGenotype(birds[i]->mutate(bitsToMutate));
+		}
 		birds[i]->renew();
 	}
 }
@@ -153,10 +155,9 @@ void Generation::sortById()  // do testow
 
 void Generation::select()
 {
-	int replacementIndex = (int) (replacementFactor * populationSize / 100);
+	int replacementIndex = (int)(replacementFactor * populationSize / 100);
 	for (int i = 0; i < replacementIndex; i++) {
 		birds[i]->setGenotype(birds[populationSize - i - 1]->getGenotype());
-		//birds[i] = birds[/*rand() % */(populationSize - replacementIndex) + replacementIndex];
 	}
 }
 
@@ -223,10 +224,10 @@ void Generation::showStats()
 {
 	std::cout << "Index\tId\tFs\tAggr\tPts\n";
 	for (int i = 0; i < populationSize; i++) {
-		std::cout << i << "\t" 
+		std::cout << i << "\t"
 			<< birds[i]->getId() << "\t"
 			<< birds[i]->getAmountOfFights() << "\t"
-			<< (int) birds[i]->getAggressiveness() << "\t"
+			<< (int)birds[i]->getAggressiveness() << "\t"
 			<< birds[i]->getPoints() << std::endl;
 	}
 	std::cout << std::endl;
@@ -238,7 +239,6 @@ void Generation::crossOver(Bird &bird1, Bird &bird2)
 	unsigned int tmp2 = bird1.getGenotype();
 	unsigned int tmp3 = bird2.getGenotype();
 	unsigned int tmp4 = bird2.getGenotype();
-	//int lol = sizeof(int);
 	tmp1 &= 0xffff0000;
 	tmp2 &= 0x0000ffff;
 	tmp3 &= 0xffff0000;

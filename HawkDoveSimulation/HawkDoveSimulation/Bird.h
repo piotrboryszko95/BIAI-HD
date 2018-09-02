@@ -22,8 +22,7 @@ public:
 	void addPoints(int);
 	void incAmountOfFights();
 	bool isFighting();
-	void mutate();
-	double mutateDouble();
+	double mutate(int);
 	void renew();
 
 private:

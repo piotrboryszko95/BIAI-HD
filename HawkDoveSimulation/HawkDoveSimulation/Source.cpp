@@ -12,15 +12,18 @@ int main(int argc, char * argv[]) {
 
 
 	std::srand(time(NULL));
+	int V = 2;
+	int C = 1;
 	if (argc < 3) {
-		std::cout << "Brak parametrow\nPodaj dwa parametry: V i C" << std::endl;
-		return -1;
+		std::cout << "Ustawiono domyslne parametry: V=2 i C=1" << std::endl;
+	}
+	else {
+		V = atoi(argv[1]);
+		C = atoi(argv[2]);
 	}
 
-	int V = atoi(argv[1]);
-	int C = atoi(argv[2]);
 	int generations = 0;
-	int step = 1;
+	int step = 10;
 	std::fstream outputFile;
 	outputFile.open("lastSimulationData.csv", std::ios::out);
 	if (!outputFile.is_open()) {
@@ -30,7 +33,7 @@ int main(int argc, char * argv[]) {
 
 	if (argc > 3) {
 		generations = atoi(argv[3]);
-	
+
 	}
 
 	if (argc > 4) {
@@ -52,8 +55,9 @@ int main(int argc, char * argv[]) {
 	gen->setC(C);
 	gen->setV(V);
 	gen->setFightsPerGeneration(100);
-	gen->setMutationChances(25);
 	gen->setReplacementFactor(5);
+	gen->setMutationChances(25*200);
+	gen->setBitsToMutate(1);
 
 
 	bool wasMouseButtonReleased = false;
